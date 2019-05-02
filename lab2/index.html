@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href='./res/favicon.ico' rel='icon' type='image/x-icon'/>
+  <title>GTFOBins Quiz</title>
+  <link rel="stylesheet" href="./res/dark.css">
+  <style>
+  .input {
+    width: 100%;
+    text-align: center;
+  }
+
+  .question {
+    text-align: center;
+  }
+  </style>
+</head>
+<body>
+  <h1>Welcome to the <a href="https://gtfobins.github.io">GTFOBins</a> Quiz</h1>
+  <br>
+  <h3 class="question">Here is the question</h3>
+  <hr>
+  <br>
+  <input type="text" class="input" placeholder="Enter your answer here">
+  <script>
+
+function choose(choices) {
+  let index = Math.floor(Math.random() * choices.length);
+  return choices[index];
+}
+
+const DATA = JSON.parse(`[{"name":"apt-get","values":["Shell","Sudo"]},{"name":"apt","values":["Shell","Sudo"]},{"name":"aria2c","values":["Command","SUID","Sudo"]},{"name":"arp","values":["File read","SUID","Sudo"]},{"name":"ash","values":["Shell","File write","SUID","Sudo"]},{"name":"awk","values":["Shell","Non-interactive reverse shell","Non-interactive bind shell","File write","File read","Sudo","Limited SUID"]},{"name":"base64","values":["File read","SUID","Sudo"]},{"name":"bash","values":["Shell","Reverse shell","File upload","File download","File write","File read","SUID","Sudo"]},{"name":"busybox","values":["Shell","File upload","File write","File read","SUID","Sudo"]},{"name":"cancel","values":["File upload"]},{"name":"cat","values":["File read","SUID","Sudo"]},{"name":"chmod","values":["SUID","Sudo"]},{"name":"chown","values":["SUID","Sudo"]},{"name":"cp","values":["SUID","Sudo"]},{"name":"cpan","values":["Shell","Reverse shell","File upload","File download","Sudo"]},{"name":"cpulimit","values":["Shell","Sudo"]},{"name":"crontab","values":["Command","Sudo"]},{"name":"csh","values":["Shell","File write","SUID","Sudo"]},{"name":"curl","values":["File upload","File download","File read","SUID","Sudo"]},{"name":"cut","values":["File read","SUID","Sudo"]},{"name":"dash","values":["Shell","File write","SUID","Sudo"]},{"name":"date","values":["File read","SUID","Sudo"]},{"name":"dd","values":["File write","File read","SUID","Sudo"]},{"name":"diff","values":["File read","SUID","Sudo"]},{"name":"dmesg","values":["Sudo"]},{"name":"dmsetup","values":["SUID","Sudo"]},{"name":"dnf","values":["Sudo"]},{"name":"docker","values":["SUID","Sudo"]},{"name":"dpkg","values":["Sudo"]},{"name":"easy_install","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","Sudo"]},{"name":"ed","values":["Shell","File write","File read","Sudo","Limited SUID"]},{"name":"emacs","values":["Shell","File write","File read","SUID","Sudo"]},{"name":"env","values":["Shell","SUID","Sudo"]},{"name":"expand","values":["File read","SUID","Sudo"]},{"name":"expect","values":["Shell","SUID","Sudo"]},{"name":"facter","values":["Shell","Sudo"]},{"name":"file","values":["File read","SUID","Sudo"]},{"name":"find","values":["Shell","SUID","Sudo"]},{"name":"finger","values":["File upload","File download"]},{"name":"flock","values":["Shell","SUID","Sudo"]},{"name":"fmt","values":["File read","SUID","Sudo"]},{"name":"fold","values":["File read","SUID","Sudo"]},{"name":"ftp","values":["Shell","File upload","File download","Sudo"]},{"name":"gdb","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","SUID","Sudo","Capabilities"]},{"name":"gimp","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","SUID","Sudo"]},{"name":"git","values":["Shell","Sudo","Limited SUID"]},{"name":"grep","values":["File read","SUID","Sudo"]},{"name":"head","values":["File read","SUID","Sudo"]},{"name":"ionice","values":["Shell","SUID","Sudo"]},{"name":"ip","values":["File read","SUID","Sudo"]},{"name":"irb","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","Sudo"]},{"name":"jjs","values":["Shell","Reverse shell","File download","File write","File read","SUID","Sudo"]},{"name":"journalctl","values":["Shell","Sudo"]},{"name":"jq","values":["File read","SUID","Sudo"]},{"name":"jrunscript","values":["Shell","Reverse shell","File download","File write","File read","SUID","Sudo"]},{"name":"ksh","values":["Shell","Reverse shell","File upload","File download","File write","File read","SUID","Sudo"]},{"name":"ld.so","values":["Shell","SUID","Sudo"]},{"name":"less","values":["Shell","File write","File read","SUID","Sudo"]},{"name":"logsave","values":["Shell","SUID","Sudo"]},{"name":"ltrace","values":["Shell","Sudo"]},{"name":"lua","values":["Shell","Non-interactive reverse shell","Non-interactive bind shell","File upload","File download","File write","File read","Sudo","Limited SUID"]},{"name":"mail","values":["Shell","Sudo"]},{"name":"make","values":["Shell","File write","SUID","Sudo"]},{"name":"man","values":["Shell","File read","Sudo"]},{"name":"more","values":["Shell","File read","SUID","Sudo"]},{"name":"mount","values":["Sudo"]},{"name":"mtr","values":["File read","Sudo"]},{"name":"mv","values":["SUID","Sudo"]},{"name":"mysql","values":["Shell","Library load","Sudo","Limited SUID"]},{"name":"nano","values":["Shell","File write","File read","SUID","Sudo"]},{"name":"nc","values":["Reverse shell","Bind shell","File upload","File download","Sudo","Limited SUID"]},{"name":"nice","values":["Shell","SUID","Sudo"]},{"name":"nl","values":["File read","SUID","Sudo"]},{"name":"nmap","values":["Shell","Non-interactive reverse shell","Non-interactive bind shell","File upload","File download","File write","File read","Sudo","Limited SUID"]},{"name":"node","values":["Shell","Reverse shell","Bind shell","SUID","Sudo","Capabilities"]},{"name":"od","values":["File read","SUID","Sudo"]},{"name":"openssl","values":["Reverse shell","File upload","File download","File write","File read","SUID","Sudo"]},{"name":"perl","values":["Shell","Reverse shell","SUID","Sudo","Capabilities"]},{"name":"pg","values":["Shell","File read","SUID","Sudo"]},{"name":"php","values":["Shell","Command","Reverse shell","File upload","File download","SUID","Sudo","Capabilities"]},{"name":"pic","values":["Shell","Sudo","Limited SUID"]},{"name":"pico","values":["Shell","File write","File read","SUID","Sudo"]},{"name":"pip","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","Sudo"]},{"name":"puppet","values":["Shell","File write","File read","Sudo"]},{"name":"python","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","SUID","Sudo","Capabilities"]},{"name":"readelf","values":["File read","SUID","Sudo"]},{"name":"red","values":["File write","File read","Sudo"]},{"name":"rlogin","values":["File upload"]},{"name":"rlwrap","values":["Shell","File write","SUID","Sudo"]},{"name":"rpm","values":["Shell","SUID","Sudo"]},{"name":"rpmquery","values":["Shell","SUID","Sudo"]},{"name":"rsync","values":["Shell","SUID","Sudo"]},{"name":"ruby","values":["Shell","Reverse shell","File upload","File download","File write","File read","Library load","Sudo","Capabilities"]},{"name":"run-mailcap","values":["Shell","File write","File read","Sudo"]},{"name":"run-parts","values":["Shell","SUID","Sudo"]},{"name":"rvim","values":["Shell","Reverse shell","Non-interactive reverse shell","Non-interactive bind shell","File upload","File download","File write","File read","Library load","SUID","Sudo","Capabilities","Limited SUID"]},{"name":"scp","values":["Shell","File upload","File download","Sudo","Limited SUID"]},{"name":"screen","values":["Shell","File write","Sudo"]},{"name":"script","values":["Shell","File write","Sudo"]},{"name":"sed","values":["Shell","Command","File write","File read","SUID","Sudo"]},{"name":"service","values":["Shell","Sudo"]},{"name":"setarch","values":["Shell","SUID","Sudo"]},{"name":"sftp","values":["Shell","File upload","File download","Sudo"]},{"name":"shuf","values":["File write","SUID"]},{"name":"smbclient","values":["Shell","File upload","File download","Sudo"]},{"name":"socat","values":["Reverse shell","Bind shell","Sudo","Limited SUID"]},{"name":"sort","values":["File read","SUID","Sudo"]},{"name":"sqlite3","values":["Shell","File write","File read","Sudo","Limited SUID"]},{"name":"ssh","values":["Shell","File upload","File download","File read","Sudo"]},{"name":"start-stop-daemon","values":["Shell","SUID","Sudo"]},{"name":"stdbuf","values":["Shell","SUID","Sudo"]},{"name":"strace","values":["Shell","SUID","Sudo"]},{"name":"systemctl","values":["SUID","Sudo"]},{"name":"tail","values":["File read","SUID","Sudo"]},{"name":"tar","values":["Shell","File write","File read","Sudo","Limited SUID"]},{"name":"taskset","values":["Shell","SUID","Sudo"]},{"name":"tclsh","values":["Shell","Non-interactive reverse shell","SUID","Sudo"]},{"name":"tcpdump","values":["Command","Sudo"]},{"name":"tee","values":["File write","SUID","Sudo"]},{"name":"telnet","values":["Shell","Reverse shell","Sudo","Limited SUID"]},{"name":"tftp","values":["File upload","File download","SUID","Sudo"]},{"name":"time","values":["Shell","SUID","Sudo"]},{"name":"timeout","values":["Shell","SUID","Sudo"]},{"name":"tmux","values":["Shell","Sudo"]},{"name":"ul","values":["File read","SUID","Sudo"]},{"name":"unexpand","values":["File read","SUID","Sudo"]},{"name":"uniq","values":["File read","SUID","Sudo"]},{"name":"unshare","values":["Shell","SUID","Sudo"]},{"name":"vi","values":["Shell","File write","File read","Sudo"]},{"name":"vim","values":["Shell","Reverse shell","Non-interactive reverse shell","Non-interactive bind shell","File upload","File download","File write","File read","Library load","SUID","Sudo","Capabilities","Limited SUID"]},{"name":"watch","values":["Shell","SUID","Sudo","Limited SUID"]},{"name":"wget","values":["File upload","File download","SUID","Sudo"]},{"name":"whois","values":["File upload","File download"]},{"name":"wish","values":["Shell","Non-interactive reverse shell","Sudo"]},{"name":"xargs","values":["Shell","File read","SUID","Sudo"]},{"name":"xxd","values":["File write","File read","SUID","Sudo"]},{"name":"yum","values":["Sudo"]},{"name":"zip","values":["Shell","Sudo","Limited SUID"]},{"name":"zsh","values":["Shell","SUID","Sudo"]},{"name":"zypper","values":["Shell","Sudo"]}]`);
+
+const V = DATA.reduce((p, e)=>{
+  e.values.map(v => p[v] ? p[v].push(e.name) : p[v] = [e.name])
+  return p;
+},{});
+
+const Labels = {"Shell": "It can be used to break out from restricted environments by spawning an interactive system shell.",
+"Command": "It can be used to break out from restricted environments by running non-interactive system commands.",
+"Reverse shell": "It can send back a reverse shell to a listening attacker to open a remote network access.",
+"Non-interactive reverse shell": "It can send back a non-interactive reverse shell to a listening attacker to open a remote network access.",
+"Bind shell": "It can bind a shell to a local port to allow remote network access.",
+"Non-interactive bind shell": "It can bind a non-interactive shell to a local port to allow remote network access.",
+"File upload": "It can exfiltrate files on the network.",
+"File download": "It can download remote files.",
+"File write": "It writes data to files, it may be used to do privileged writes or write files outside a restricted file system.",
+"File read": "It reads data from files, it may be used to do privileged reads or disclose files outside a restricted file system.",
+"Library load": "It loads shared libraries that may be used to run code in the binary execution context.",
+"SUID": "It runs with the SUID bit set and may be exploited to access the file system, escalate or maintain access with elevated privileges working as a SUID backdoor. If it is used to run `sh -p`, omit the `-p` argument on systems like Debian that allow the default `sh` shell to run with SUID privileges.",
+"Sudo": "It runs in privileged context and may be used to access the file system, escalate or maintain access with elevated privileges if enabled on `sudo`.",
+"Capabilities": "It can manipulate its process UID and can be used on Linux as a backdoor to maintain elevated privileges with the `CAP_SETUID` capability set. This also works when executed by another binary with the capability set.",
+"Limited SUID": "It runs with the SUID bit set and may be exploited to access the file system, escalate or maintain access with elevated privileges working as a SUID backdoor. If it is used to run commands it only works on systems like Debian that allow the default `sh` shell to run with SUID privileges."};
+
+let category = '';
+
+console.log(V);
+const setListeners = ({inputEl}) => {
+  inputEl.addEventListener('input', () => {
+    console.log(inputEl.value);
+  })
+}
+
+const newQuestion = (questionEl) => {
+  category = choose(Object.keys(Labels))
+  questionEl.textContent = "Name a binary that" + Labels[category].substring(2);
+}
+
+const main = () => {
+  const questionEl = document.querySelector('.question');
+  const inputEl = document.querySelector('.input');
+  console.log(DATA);
+  setListeners({inputEl});
+  console.log(questionEl);
+  newQuestion(questionEl);
+  
+  
+};
+
+window.onload = main;
+
+  </script>
+</body>
+</html>
