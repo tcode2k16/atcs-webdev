@@ -34,6 +34,11 @@
   .hidden {
     display: none;
   }
+
+  .buttonDiv {
+    display: flex;
+    justify-content: center;
+  }
   </style>
 </head>
 <body>
@@ -60,12 +65,18 @@
   <div class="hidden end">
     <br>
     <hr>
-    <h3>Game over. Here are the ones you didn't get:</h3>
+    <h3 class="endMessage"></h3>
     <p class="rest"></p>
   </div>
+  <div class="buttonDiv">
+      <button class="switch hidden"></button>
+  </div>
+  
   <script>
 
-const Commands = ['bunzip2', 'bzcat', 'bzip2', 'cat', 'chgrp', 'chmod', 'chown', 'chvt', 'cp', 'cpio', 'date', 'dd', 'df', 'dmesg', 'dnsdomainname', 'echo', 'ed', 'egrep', 'false', 'fgrep', 'grep', 'gunzip', 'gzip', 'hostname', 'ip', 'kill', 'less', 'ln', 'login', 'ls', 'lsmod', 'mkdir', 'mknod', 'mktemp', 'more', 'mount', 'mt', 'mv', 'nc', 'netstat', 'openvt', 'pidof', 'ping', 'ping6', 'ps', 'pwd', 'readlink', 'rm', 'rmdir', 'run-parts', 'sed', 'sh', 'sleep', 'stty', 'su', 'sync', 'tar', 'touch', 'true', 'umount', 'uname', 'uncompress', 'which', 'zcat', 'whoami', 'awk', 'pgrep', 'vi', 'top', 'yes', 'id', 'ifconfig'];
+const Commands = ['bunzip2', 'bzcat', 'bzip2', 'cat', 'chgrp', 'chmod', 'chown', 'chvt', 'cp', 'cpio', 'date', 'dd', 'df', 'dmesg', 'dnsdomainname', 'echo', 'ed', 'egrep', 'false', 'fgrep', 'grep', 'gunzip', 'gzip', 'hostname', 'ip', 'kill', 'less', 'ln', 'login', 'ls', 'lsmod', 'mkdir', 'mknod', 'mktemp', 'more', 'mount', 'mt', 'mv', 'nc', 'netstat', 'openvt', 'pidof', 'ping', 'ping6', 'ps', 'pwd', 'readlink', 'rm', 'rmdir', 'run-parts', 'sed', 'sh', 'sleep', 'stty', 'su', 'sync', 'tar', 'touch', 'true', 'umount', 'uname', 'uncompress', 'which', 'zcat', 'whoami', 'awk', 'pgrep', 'vi', 'top', 'yes', 'id', 'ifconfig', 'cd', 'ssh', 'xxd', 'man', 'strings', 'nano', 'file', 'curl', 'wget', 'find', 'exit'];
+// const Commands = ['cat'];
+Commands.sort();
 
 let current_list = [];
 let timeLeft = 0;
@@ -76,9 +87,10 @@ const updateProgress = () => {
   const countEl = document.querySelector('.count');
   progressEl.innerHTML = current_list.map(e => `<code>${e}</code>`).join(', ');
   countEl.innerHTML = `${current_list.length} out of ${Commands.length}`;
+  if (current_list.length === Commands.length) endGame();
 }
 
-const startTimer = () => {
+const startGame = () => {
   timeLeft = 60;
 
   interval = setInterval(() => {
@@ -87,6 +99,22 @@ const startTimer = () => {
     timeEl.innerHTML = `${Math.floor(timeLeft/60)}:${(timeLeft%60+'').padStart(2, '0')}`;
     if (timeLeft === 0) endGame();
   }, 1000);
+
+  const switchEl = document.querySelector('.switch');
+  switchEl.textContent = 'Give Up';
+  switchEl.onclick = () => endGame();
+  switchEl.classList.remove('hidden');
+
+  const inputEl = document.querySelector('.input');
+  inputEl.disabled = false;
+  inputEl.value = '';
+  inputEl.focus();
+
+  const endEl = document.querySelector('.end');
+  endEl.classList.add('hidden');
+
+  current_list = [];
+  updateProgress();
 }
 
 const endGame = () => {
@@ -95,20 +123,32 @@ const endGame = () => {
   const inputEl = document.querySelector('.input');
   const restEl = document.querySelector('.rest');
   const endEl = document.querySelector('.end');
+  const endMessageEl = document.querySelector('.endMessage');
   
   inputEl.disabled = true;
 
-  restEl.innerHTML = Commands.filter(e => current_list.indexOf(e) < 0).map(e => `<code>${e}</code>`).join(', ');
+  if (current_list.length === Commands.length) {
+    endMessageEl.textContent = 'Nice job. You got all of them!';
+    restEl.innerHTML = '';
+  } else {
+    endMessageEl.textContent = `Game over. Here are the ones you didn't get:`;
+    restEl.innerHTML = Commands.filter(e => current_list.indexOf(e) < 0).map(e => `<code>${e}</code>`).join(', ');
+  }
+  
   endEl.classList.remove('hidden');
+
+  const switchEl = document.querySelector('.switch');
+  switchEl.textContent = 'Restart Game';
+  switchEl.onclick = () => startGame();
 }
 
 const setListeners = ({inputEl}) => {
   inputEl.addEventListener('input', () => {
     const v = inputEl.value;
+    if (!interval) startGame();
     if (current_list.indexOf(v) < 0 && Commands.indexOf(v) >= 0) {
       inputEl.value = '';
       current_list.push(v);
-      if (current_list.length === 1) startTimer();
       updateProgress();
 
     }
