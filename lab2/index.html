@@ -107,7 +107,6 @@ const startGame = () => {
 
   const inputEl = document.querySelector('.input');
   inputEl.disabled = false;
-  inputEl.value = '';
   inputEl.focus();
 
   const endEl = document.querySelector('.end');
@@ -126,6 +125,8 @@ const endGame = () => {
   const endMessageEl = document.querySelector('.endMessage');
   
   inputEl.disabled = true;
+  inputEl.value = '';
+
 
   if (current_list.length === Commands.length) {
     endMessageEl.textContent = 'Nice job. You got all of them!';
